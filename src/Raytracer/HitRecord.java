@@ -5,7 +5,7 @@ package Raytracer;
  * der senkrecht aus dem eintritspunkt zeigt, also normalenvektor der
  * tangetialebende an dem punkt
  */
-public class HitRecord {
+public class HitRecord {  
 
 	public Vec3 p;
 	public Vec3 normal;
