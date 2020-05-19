@@ -4,16 +4,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
+/**
+ * Implemantation von Vektoren im R^3.
+ */
 public class Vec3 {
 
 	public double x, y, z;
 
+	/**
+	 * Constructor for a vector with given components.
+	 */
 	public Vec3(double x, double y, double z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
 
+	/**
+	 * Constructor for 0 vector.
+	 */
 	public Vec3() {
 		this(0, 0, 0);
 	}
@@ -26,6 +35,9 @@ public class Vec3 {
 		return new Vec3(this.x - v.x, this.y - v.y, this.z - v.z);
 	}
 
+	/**
+	 * Multiplies vector components with each other (not mathematical but useful).
+	 */
 	public Vec3 multpl(Vec3 v) {
 		return new Vec3(this.x * v.x, this.y * v.y, this.z * v.z);
 	}
@@ -38,32 +50,53 @@ public class Vec3 {
 		return new Vec3(d * this.x, d * this.y, d * this.z);
 	}
 
+	/**
+	 * Standart-Skalarprodukt.
+	 */
 	public double dot(Vec3 v) {
 		return this.x * v.x + this.y * v.y + this.z * v.z;
 	}
 
+	/**
+	 * Kreuzprodukt.
+	 */
 	public Vec3 cross(Vec3 v) {
 		return new Vec3(this.y * v.z - this.z * v.y, this.z * v.x - this.x * v.z, this.x * v.y - this.y * v.x);
 	}
 
+	/**
+	 * Euklidische Norm des Vektors.
+	 */
 	public double length() {
 		return Math.sqrt(this.lengthSquared());
 	}
 
+	/**
+	 * Euklidische Norm des Vektors zm Quadrat.
+	 */
 	public double lengthSquared() {
 		return this.x * this.x + this.y * this.y + this.z * this.z;
 	}
 
+	/**
+	 * Gibt den Vektor in normiert zurück.
+	 */
 	public Vec3 normalize() {
 		double l = this.length();
 		return new Vec3(this.x / l, this.y / l, this.z / l);
 	}
 	
+	/**
+	 * Gibt vector mit random Einträgen zwischen 0 und 1 zurück.
+	 */
 	public static Vec3 random() {
 		Random r = new Random();
 		return new Vec3(r.nextDouble(), r.nextDouble(), r.nextDouble());
 	}
 	
+	/**
+	 * Gibt vector mit random Einträgen zwischen min und max zurück.
+	 */
 	public static Vec3 random(double min, double max) {
 		return new Vec3(randomDouble(min, max),randomDouble(min, max),randomDouble(min, max));
 	}
@@ -106,7 +139,12 @@ public class Vec3 {
 			return max;
 		return x;
 	}
-
+	
+	/**
+	 * Writes rgb color value into the file, wird auf der farbe als vektor aufgerufen.
+	 * @param samples_per_pixel
+	 * @throws IOException
+	 */
 	public void writeColor(FileWriter writer, int samples_per_pixel) throws IOException {
 		// divide color total by number of samples and gamma-correct for gamma value of 2.0
 		double scale = 1.0 / samples_per_pixel;
